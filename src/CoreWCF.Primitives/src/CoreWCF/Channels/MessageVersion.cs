@@ -10,12 +10,14 @@ namespace CoreWCF.Channels
         AddressingVersion addressing;
         static MessageVersion none;
         static MessageVersion soap11;
+        static MessageVersion soap12;
         static MessageVersion soap12Addressing10;
 
         static MessageVersion()
         {
             none = new MessageVersion(EnvelopeVersion.None, AddressingVersion.None);
             soap11 = new MessageVersion(EnvelopeVersion.Soap11, AddressingVersion.None);
+            soap12 = new MessageVersion(EnvelopeVersion.Soap12, AddressingVersion.None);
             soap12Addressing10 = new MessageVersion(EnvelopeVersion.Soap12, AddressingVersion.WSAddressing10);
         }
 
@@ -44,7 +46,11 @@ namespace CoreWCF.Channels
 
             if (envelopeVersion == EnvelopeVersion.Soap12)
             {
-                if (addressingVersion == AddressingVersion.WSAddressing10)
+                if (addressingVersion == AddressingVersion.None)
+                {
+                    return soap12;
+                }
+                else if (addressingVersion == AddressingVersion.WSAddressing10)
                 {
                     return soap12Addressing10;
                 }
@@ -126,6 +132,11 @@ namespace CoreWCF.Channels
         public static MessageVersion Soap11
         {
             get { return soap11; }
+        }
+
+        public static MessageVersion Soap12
+        {
+            get { return soap12; }
         }
 
         public override string ToString()

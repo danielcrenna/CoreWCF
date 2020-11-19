@@ -70,10 +70,10 @@ namespace CoreWCF.Channels
                         //{
                         //    WriteHeader(writer, MessageVersion.Soap11WSAddressingAugust2004);
                         //}
-                        //else if (IsMessageVersionSupported(MessageVersion.Soap12))
-                        //{
-                        //    WriteHeader(writer, MessageVersion.Soap12);
-                        //}
+                        else if (IsMessageVersionSupported(MessageVersion.Soap12))
+                        {
+                            WriteHeader(writer, MessageVersion.Soap12);
+                        }
                         else if (IsMessageVersionSupported(MessageVersion.Soap11))
                         {
                             WriteHeader(writer, MessageVersion.Soap11);
